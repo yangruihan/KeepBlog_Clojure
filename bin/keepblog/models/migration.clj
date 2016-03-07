@@ -8,14 +8,14 @@
                        "where table_name='" table-name "'")])
     first :count pos?))
 
-(def *user-table-name* "users")
+(def user-table-name "users")
 
 (defn- create-user-table []
-  (when (not (migrated? *user-table-name*))
-    (println (str "Creating table " *user-table-name* "...")) (flush)
+  (when (not (migrated? user-table-name))
+    (println (str "Creating table " user-table-name "...")) (flush)
     (sql/db-do-commands user/spec
                         (sql/create-table-ddl
-                          *user-table-name*
+                          user-table-name
                           [:id "INT PRIMARY KEY AUTO_INCREMENT"]
                           [:username "VARCHAR(50) NOT NULL"]
                           [:password "VARCHAR(50) NOT NULL"]

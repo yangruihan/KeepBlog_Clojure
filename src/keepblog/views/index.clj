@@ -1,13 +1,11 @@
-(ns keepblog.views.index)
+(ns keepblog.views.index
+  (:require [keepblog.views.config :as config]))
 
 ; 使用 selmer 模板库
 (use 'selmer.parser)
+; 设置参数
+(config/set-config)
 
-; 关闭缓存，使网页修改能立即显示
-(selmer.parser/cache-off!)
-
-; 设置模板路径为 resource/templates
-(selmer.parser/set-resource-path! (clojure.java.io/resource "templates"))
-
-(defn index []
-  (render-file "index.html" {}))
+(defn index 
+  ([] (render-file "index.html" {}))
+  ([info] (render-file "index.html" info)))
