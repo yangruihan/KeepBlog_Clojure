@@ -3,7 +3,8 @@
 		    [noir.cookies :only (wrap-noir-cookies)]
 		    [noir.session :only (mem wrap-noir-session wrap-noir-flash)]
         [ring.middleware.session.memory :only (memory-store)]
-        [ring.middleware.anti-forgery])
+        [ring.middleware.anti-forgery]
+        [ring.middleware.session])
   (:require [ring.adapter.jetty :as ring]
 				    [ring.middleware.params :as params]
 				    [ring.middleware.keyword-params :as keyword-params]
@@ -18,7 +19,6 @@
 (def app
   (-> urlhandlers/app-routes
     (resource/wrap-resource (clojure.java.io/resource "resources"))  ;; static resource
-    wrap-anti-forgery
     noir/wrap-request-map
     templating/wrap-template-response  ;; render template
     json/wrap-json-response            ;; render json
@@ -30,7 +30,9 @@
     wrap-noir-cookies
     wrap-noir-flash
     (wrap-noir-session {:store (memory-store mem),
-                        :cookie-name "keepblog-app-session"})
+                        :cookie-name "keepblog-app-session"}
+    wrap-anti-forgery
+    wrap-session)
 ))
 
 (defn start [port]
