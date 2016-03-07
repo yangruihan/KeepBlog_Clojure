@@ -23,7 +23,7 @@
 (defn new-session-action [user]
   (if (session/get :user-id)
     (resp/redirect "/")
-    (index-view/index {:error-msg (vali/get-errors)})))
+    (user-view/login user (first (vali/get-errors)))))
   
 ;; 登录 Action
 (defn login-action [user]

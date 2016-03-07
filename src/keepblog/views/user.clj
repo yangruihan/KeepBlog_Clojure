@@ -8,8 +8,10 @@
 (config/set-config)
 
 ; 登录页面显示
-(defn login []
-  (render-file "login.html" {}))
+(defn login 
+  ([] (render-file "login.html" {}))
+  ([user error] (render-file "login.html" {:user user,
+                                           :error error})))
 
 ; 注册页面显示
 (defn register
