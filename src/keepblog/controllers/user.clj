@@ -7,9 +7,11 @@
             [keepblog.views.index :as index-view]
             [keepblog.models.user :as user]))
 
-;; 登录页面
+;; 登录
 (defn login []
-  (user-view/login))
+  (if (session/get :user-id)
+    (resp/redirect "/")
+    (user-view/login)))
 
 ;; 保存用户信息进 session
 (defn save-user-info-in-session [{:keys [id username]}]
@@ -23,15 +25,35 @@
     (resp/redirect "/")
     (index-view/index {:error-msg (vali/get-errors)})))
   
-;; 创建会话动作
-(defn create-session-action [credentials]
-  (if-let [user (user/login! credentials)]
+;; 登录 Action
+(defn login-action [user]
+  (if-let [user (user/login! user)]
     (do
       (save-user-info-in-session user)
-      (index-view/index {:user user}))
-    (new-session-action credentials)))
+      (resp/redirect "/"))
+    (new-session-action user)))
+
+;; 注销
+(defn logout-action []
+  (session/clear!)
+  (resp/redirect "/"))
+
+;; 注册
+(defn register []
+  (user-view/register))
+
+;; 注册 Action
+(defn register-action [new-user]
+  (if-let [saved-user (user/create! new-user)]
+    (do 
+      (session/put! :user-id (:id saved-user))
+      (resp/redirect "/"))
+    (user-view/register new-user (first (vali/get-errors)))))
       
 ;; 路由设置
 (defroutes routes
   (GET "/login" [] (login))
-  (POST "/login" {user :params} (create-session-action user)))
+  (POST "/login" {user :params} (login-action user))
+  (GET "/logout" [] (logout-action))
+  (GET "/register" [] (register))
+  (POST "/register" {user :params} (register-action user)))

@@ -11,3 +11,9 @@
 (defn login []
   (render-file "login.html" {}))
 
+; 注册页面显示
+(defn register
+  ([] (render-file "register.html" {}))
+  ([user error] (render-file "register.html" {:user user,
+                                              :error error})))
+
