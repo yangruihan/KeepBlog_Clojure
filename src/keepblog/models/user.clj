@@ -1,25 +1,10 @@
 (ns keepblog.models.user
   (:use [korma.db :refer [defdb mysql]]
-        [korma.core :exclude [update]])
+        [korma.core :exclude [update]]
+        [keepblog.models.korma-config])
   (:require [clojure.string :as string] 
             [noir.util.crypt :as crypt]
             [noir.validation :as vali]))
-
-(defdb db
-  ;; 定义数据库
-  (mysql {:db "keepblog",
-                  :host "localhost",
-                  :port 3306,
-                  :user "root",
-                  :password "123456"}))
-
-;; 定义一张表
-(defentity users)
-
-;; 定义数据库连接 url
-(def spec 
-  (or (System/getenv "DATABASE_URL")
-      "mysql:///keepblog?useUnicode=true&characterEncoding=UTF-8&user=root&password=123456"))
 
 ;; 向数据库中创建一条用户信息
 (defn create [user]
@@ -69,3 +54,7 @@
      (vali/set-error :base "数据库插入失败")
      nil)))
 
+;; 得到一个用户的个人信息
+(defn get-userinfo-by-user []
+  (println (select user_infos
+                   (with users))))

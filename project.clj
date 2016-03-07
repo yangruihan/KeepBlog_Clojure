@@ -8,6 +8,10 @@
                  [mysql/mysql-connector-java "5.1.25"]
                  [javax.servlet/servlet-api "2.5"]
                  [korma "0.4.2"]
+                 [log4j "1.2.15" :exclusions [javax.mail/mail
+                            javax.jms/jms
+                            com.sun.jdmk/jmxtools
+                            com.sun.jmx/jmxri]]
                  [ring "1.4.0"]
                  [ring/ring-json "0.4.0"]
                  [compojure "1.4.0"]
