@@ -11,4 +11,13 @@
                  [ring "1.4.0"]
                  [ring/ring-json "0.4.0"]
                  [compojure "1.4.0"]
-                 [selmer "1.0.0"]])
+                 [selmer "1.0.0"]]
+  :main ^:skip-aot keepblog.web
+  :uberjar-name "keepblog-standalone.jar"
+  :plugins [[lein-ring "0.8.13"]]
+  :min-lein-version "2.0.0"
+  :ring {:handler keepblog.web/app
+         :init keepblog.models.migration/migrate
+         :auto-reload? true
+         :auto-refresh? true}
+  :source-paths ["src"])
