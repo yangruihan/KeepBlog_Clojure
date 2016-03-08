@@ -14,3 +14,7 @@
             (where {:user_id user-id}))
     (vali/set-error :base "获得所有分类失败")))
 
+(defn get-category-by-article-id [article-id]
+  (select categories
+          (where {:id (:category_id (first (select articles
+                                                   (where {:id article-id}))))})))

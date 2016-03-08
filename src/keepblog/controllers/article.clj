@@ -4,6 +4,7 @@
             [noir.validation :as vali]
             [noir.response :as resp]
             [clojure.string :as str]
+            [markdown.core :as markdown]
             [keepblog.utils.collection :as col-utils]
             [keepblog.views.article :as article-view]
             [keepblog.models.category :as category]
@@ -50,6 +51,18 @@
 		                                   :error (first (vali/get-errors))}))
        (article-view/create-article-suc {:article (first (article/get-by {:id article-id}))})))))
 
+(defn- show-article [article-id]
+  (let [[article tags category]
+        [(first (article/get-by {:id article-id}))
+         (tag/get-tags-by-article-id article-id)
+         (first (category/get-category-by-article-id article-id))]]
+    (if-let [transformed-article-content (markdown/md-to-html-string (:content article))]
+	    (article-view/show-article {:article article,
+	                                :tags tags,
+                                  :category category
+                                  :transformed-article-content transformed-article-content}))))
+
 (defroutes routes
   (GET "/create_article" [] (create-article))
-  (POST "/create_article" {article :params} (create-article-action article)))
+  (POST "/create_article" {article :params} (create-article-action article))
+  (GET "/article/:article-id" [article-id] (show-article article-id)))

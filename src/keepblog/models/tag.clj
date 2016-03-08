@@ -17,4 +17,7 @@
       (let [res (conj tag-ids (:id (first (get-by {:tagname name}))))]
         (first res)))))
     
-    
+(defn get-tags-by-article-id [article-id]
+  (select tags
+          (join tag_article (= :tag_article.tag_id :id))
+          (where {:tag_article.article_id article-id})))

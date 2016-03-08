@@ -11,3 +11,6 @@
 
 (defn create-article-suc
   ([info] (render-file "article/create_article_suc.html" info)))
+
+(defn show-article
+  ([info] (render-file "article/show_article.html" info)))

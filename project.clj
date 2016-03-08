@@ -17,10 +17,11 @@
                  [compojure "1.4.0"]
                  [selmer "1.0.0"]
                  [lib-noir "0.9.9"]
-                 [ring/ring-anti-forgery "1.0.0"]]
+                 [ring/ring-anti-forgery "1.0.0"]
+                 [markdown-clj "0.9.86"]]
   :main ^:skip-aot keepblog.web
   :uberjar-name "keepblog-standalone.jar"
-  :plugins [[lein-ring "0.8.13"]]
+  :plugins [[lein-ring "0.9.7"]]
   :min-lein-version "2.0.0"
   :ring {:handler keepblog.web/app
          :init keepblog.models.migration/migrate
