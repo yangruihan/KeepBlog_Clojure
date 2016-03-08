@@ -1,7 +1,7 @@
 (ns keepblog.models.user
   (:use [korma.db :refer [defdb mysql]]
         [korma.core :exclude [update]]
-        [keepblog.models.korma-config])
+        [keepblog.models.korma_config])
   (:require [clojure.string :as string] 
             [noir.util.crypt :as crypt]
             [noir.validation :as vali]))
@@ -53,8 +53,3 @@
      (println e)
      (vali/set-error :base "数据库插入失败")
      nil)))
-
-;; 得到一个用户的个人信息
-(defn get-userinfo-by-user []
-  (println (select user_infos
-                   (with users))))

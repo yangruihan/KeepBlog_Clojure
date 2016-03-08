@@ -1,4 +1,4 @@
-(ns keepblog.models.korma-config
+(ns keepblog.models.korma_config
   (:use [korma.db :refer [defdb mysql]]
         [korma.core :exclude [update]])
   (:require [clojure.string :as string]))
@@ -20,3 +20,13 @@
 (defentity user_infos
   (belongs-to users {:fk :user_id}))
 
+(defentity tags
+  (many-to-many articles :tag_article))
+
+(defentity categories
+  (belongs-to articles {:fk :category_id}))
+
+(defentity articles
+  (belongs-to users {:fk :user_id})
+  (has-one categories {:fk :category_id})
+  (many-to-many tags :tag_article))

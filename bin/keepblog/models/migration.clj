@@ -1,5 +1,4 @@
 (ns keepblog.models.migration
-  (:use [korma.db :refer [defdb mysql]])
   (:require [clojure.java.jdbc :as sql]))
 
 ;; 定义数据库连接 url

@@ -5,20 +5,28 @@
 <title>Keep Blog</title>
 </head>
 <body>
-	<h1>Keep Blog</h1><br>
-	<div class="blog_description">Keep writing every day</div>
-	{% for error in error-msg %}
-		<div class="error_msg">
-		{{ error }}
-		</div>
-	{% endfor %}
-	<br>
+	<h1>Keep Blog</h1><hr>
+	<div class="blog_description">Keep writing every day</div><br>
+	
 	{% if user %}
 		欢迎您，{{ user.username }}
 		<a href="logout">注销</a>
 	{% else %}
 		<a href="login">登录</a>
 		<a href="register">注册</a>
+	{% endif %}
+	
+	<hr>
+	
+	{% if articles %}
+	<div class="articles_block"></div>
+		<h2>我的博文</h2>
+		<ul>
+		{% for article in articles %}
+			<li><a href="article/{{ article.id }}">{{ article.title }}</a></li>
+		{% endfor %}
+		</ul>
+	</div>
 	{% endif %}
 </body>
 </html>
