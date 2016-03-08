@@ -7,17 +7,13 @@
             [noir.validation :as vali]))
 
 ;; 向数据库中创建一条用户信息
-(defn create [user]
-  (let [{:keys [username password email]} user]
-	  (try
-     (insert users
-	            (values {:username username,
-	                     :password password,
-	                     :email email}))
-     (catch Exception e
-       (println e)
-       (vali/set-error :base-error "数据库插入失败")
-       nil))))
+(defn- create [user]
+  (try
+    (insert users
+            (values user))
+    (catch Exception e
+      (println e)
+      nil)))
 
 ;; 得到数据库中所有记录
 (defn all []

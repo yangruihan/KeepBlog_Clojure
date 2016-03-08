@@ -8,25 +8,26 @@
             [keepblog.models.user :as user]))
 
 ;; 登录
-(defn login []
+(defn- login []
   (if (session/get :user-id)
     (resp/redirect "/")
     (user-view/login)))
 
 ;; 保存用户信息进 session
-(defn save-user-info-in-session [{:keys [id username]}]
+(defn- save-user-info-in-session [{:keys [id username]}]
   (when (= username "admin")
     (session/put! :admin true)
     (println "Admin Login"))
   (session/put! :user-id id))
 
-(defn new-session-action [user]
+(defn- new-session-action [user]
   (if (session/get :user-id)
     (resp/redirect "/")
-    (user-view/login {:user user :error (first (vali/get-errors))})))
+    (user-view/login {:user user,
+                      :error (first (vali/get-errors))})))
   
 ;; 登录 Action
-(defn login-action [user]
+(defn- login-action [user]
   (if-let [user (user/login! user)]
     (do
       (save-user-info-in-session user)
@@ -34,21 +35,22 @@
     (new-session-action user)))
 
 ;; 注销
-(defn logout-action []
+(defn- logout-action []
   (session/clear!)
   (resp/redirect "/"))
 
 ;; 注册
-(defn register []
+(defn- register []
   (user-view/register))
 
 ;; 注册 Action
-(defn register-action [new-user]
+(defn- register-action [new-user]
   (if-let [saved-user (user/create! new-user)]
     (do 
       (session/put! :user-id (:id saved-user))
       (resp/redirect "/"))
-    (user-view/register {:user new-user :error (first (vali/get-errors))})))
+    (user-view/register {:user new-user,
+                         :error (first (vali/get-errors))})))
       
 ;; 路由设置
 (defroutes routes

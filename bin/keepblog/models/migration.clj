@@ -55,7 +55,9 @@
 (defn- create-category-table []
   (create-table category-table-name
                 [:id "int NOT NULL PRIMARY KEY AUTO_INCREMENT"]
-                [:categoryname "varchar(64) NOT NULL"]))
+                [:categoryname "varchar(64) NOT NULL"]
+                [:user_id "int NOT NULL"]
+                ["CONSTRAINT `fk_category_to_user` FOREIGN KEY (`user_id`) REFERENCES" user-table-name "(`id`) ON DELETE CASCADE ON UPDATE CASCADE"]))
 
 (defn- create-article-table []
   (create-table article-table-name
@@ -63,7 +65,7 @@
                 [:title "varchar(100) NOT NULL"]
                 [:create_time "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP"]
                 [:user_id "int NOT NULL"]
-                [:category_id "int"]
+                [:category_id "int NOT NULL"]
                 [:content "text NULL"]
                 ["CONSTRAINT `fk_article_to_user` FOREIGN KEY (`user_id`) REFERENCES" user-table-name "(`id`) ON DELETE CASCADE ON UPDATE CASCADE"]
                 ["CONSTRAINT `fk_article_to_category` FOREIGN KEY (`category_id`) REFERENCES" category-table-name "(`id`) ON UPDATE CASCADE"]))
@@ -73,8 +75,8 @@
                 [:id "int NOT NULL PRIMARY KEY AUTO_INCREMENT"]
                 [:tag_id "int NOT NULL"]
                 [:article_id "int NOT NULL"]
-                ["CONSTRAINT `fk_tag_article_to_tag` FOREIGN KEY (`tag_id`) REFERENCES" tag-table-name "(`id`) ON UPDATE CASCADE"]
-                ["CONSTRAINT `fk_tag_article_to_article` FOREIGN KEY (`article_id`) REFERENCES" article-table-name "(`id`) ON UPDATE CASCADE"]))
+                ["CONSTRAINT `fk_tag_article_to_tag` FOREIGN KEY (`tag_id`) REFERENCES" tag-table-name "(`id`) ON DELETE CASCADE ON UPDATE CASCADE"]
+                ["CONSTRAINT `fk_tag_article_to_article` FOREIGN KEY (`article_id`) REFERENCES" article-table-name "(`id`) ON DELETE CASCADE ON UPDATE CASCADE"]))
                 
 (defn migrate []
   (do

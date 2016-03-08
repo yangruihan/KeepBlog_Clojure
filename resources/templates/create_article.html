@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>写文章</title>
+</head>
+<body>
+	<h1>写文章</h1>
+	{{ error }}
+	<hr>
+	<form action="create_article" method="POST">
+		标题：<input type="text" name="title" value="{{ article.title }}"><br>
+		分类：
+		<select name="category">
+			{% for category in categories %}
+				<option value ="{{ category.id }}">{{ category.categoryname }}</option>
+			{% endfor %}
+		</select>
+		<button>新建分类</button>
+		<br>
+		标签：<input type="text" name="tag"><br>
+		内容：<br>
+		<textarea cols="100" rows="30" name="content">{{ article.content }}</textarea><br>
+		<input type="submit" value="提交">
+		<button>取消</button>
+	</form>
+</body>
+</html>

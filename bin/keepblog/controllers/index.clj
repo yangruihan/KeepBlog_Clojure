@@ -8,11 +8,11 @@
             [keepblog.models.article :as article]))
 
 ;; 主页
-(defn index []
-  (if (session/get :user-id)
+(defn- index []
+  (if-let [user-id (session/get :user-id)]
     (index-view/index 
-      {:user (first (user/get-by {:id (session/get :user-id)})),
-       :articles (article/get-all-articles-by-user {:id (session/get :user-id)})})
+      {:user (first (user/get-by {:id user-id})),
+       :articles (article/get-all-articles-by-user {:id user-id})})
     (index-view/index)))
 
 ;; 路由设置
