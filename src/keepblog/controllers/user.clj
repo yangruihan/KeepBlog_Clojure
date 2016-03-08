@@ -23,7 +23,7 @@
 (defn new-session-action [user]
   (if (session/get :user-id)
     (resp/redirect "/")
-    (user-view/login user (first (vali/get-errors)))))
+    (user-view/login {:user user :error (first (vali/get-errors))})))
   
 ;; 登录 Action
 (defn login-action [user]
@@ -48,7 +48,7 @@
     (do 
       (session/put! :user-id (:id saved-user))
       (resp/redirect "/"))
-    (user-view/register new-user (first (vali/get-errors)))))
+    (user-view/register {:user new-user :error (first (vali/get-errors))})))
       
 ;; 路由设置
 (defroutes routes

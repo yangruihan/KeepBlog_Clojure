@@ -10,12 +10,10 @@
 ; 登录页面显示
 (defn login 
   ([] (render-file "login.html" {}))
-  ([user error] (render-file "login.html" {:user user,
-                                           :error error})))
+  ([info] (render-file "login.html" {:info info})))
 
 ; 注册页面显示
 (defn register
   ([] (render-file "register.html" {}))
-  ([user error] (render-file "register.html" {:user user,
-                                              :error error})))
+  ([info] (render-file "register.html" {:info info})))
 
