@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>写文章</title>
-</head>
-<body>
-	<h1>写文章</h1>
+{% extends "base/base.html" %}
+
+{% block title %}
+写文章
+{% endblock %}
+
+{% block body %}
+	<h2>写文章</h2>
 	{{ error }}
-	<hr>
 	<form action="create_article" method="POST">
 		标题：<input type="text" name="title" value="{{ article.title }}"><br>
 		分类：
@@ -24,5 +23,4 @@
 		<input type="submit" value="提交">
 		<button>取消</button>
 	</form>
-</body>
-</html>
+{% endblock %}

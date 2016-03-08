@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Keep Blog</title>
-</head>
-<body>
-	<h1>Keep Blog</h1><hr>
+{% extends "base/base.html" %}
+
+{% block title %}
+Keep Blog
+{% endblock %}
+
+{% block body %}
+
 	<div class="blog_description">Keep writing every day</div><br>
 	
 	{% if user %}
@@ -17,9 +17,8 @@
 		<a href="register">注册</a>
 	{% endif %}
 	
-	<hr>
-	
 	{% if articles %}
+	<hr>
 	<div class="articles_block"></div>
 		<h2>我的博文</h2>
 		<ul>
@@ -29,5 +28,5 @@
 		</ul>
 	</div>
 	{% endif %}
-</body>
-</html>
+	
+{% endblock %}

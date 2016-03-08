@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>登录</title>
-</head>
-<body>
-	<h1>登录</h1>
+{% extends "base/base.html" %}
+
+{% block title %}
+登录
+{% endblock %}
+
+{% block body %}
 	{{ error }}
 	<form action="login" method="post">
 		<table>
@@ -18,9 +17,8 @@
 				<td><input type="password" name="password" placeholder="password" value="{{ user.password }}"/></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+				<td colspan="2" align="center"><input type="submit" value="登录"/><button>返回</button></td>
 			</tr>
 		</table>
 	</form>
-</body>
-</html>
+{% endblock %}
