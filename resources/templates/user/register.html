@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	{{ error }}
+	<div class="error_msg">{{ error }}</div>
 	<form action="register" method="post">
 		<table>
 			<tr>
@@ -21,8 +21,15 @@
 				<td><input type="email" name="email" placeholder="example@example.com" value="{{ user.email }}"/></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit" value="注册"/><button>返回</button></td>
+				<td colspan="2" align="center">
+					<input type="submit" value="注册"/>
+					<button id="back_btn">返回</button>
+				</td>
 			</tr>
 		</table>
 	</form>
+{% endblock %}
+
+{% block scripts %}
+	{% script "/staticfiles/js/user/register.js" %}
 {% endblock %}

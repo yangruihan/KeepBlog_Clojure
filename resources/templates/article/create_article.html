@@ -6,7 +6,7 @@
 
 {% block body %}
 	<h2>写文章</h2>
-	{{ error }}
+	<div class="error_msg">{{ error }}</div>
 	<form action="create_article" method="POST">
 		标题：<input type="text" name="title" value="{{ article.title }}"><br>
 		分类：
@@ -21,6 +21,10 @@
 		内容：<br>
 		<textarea cols="100" rows="30" name="content">{{ article.content }}</textarea><br>
 		<input type="submit" value="提交">
-		<button>取消</button>
+		<button id="back_btn" class="back_btn">取消</button>
 	</form>
+{% endblock %}
+
+{% block scripts %}
+	{% script "/staticfiles/js/article/create_article.js"%}
 {% endblock %}

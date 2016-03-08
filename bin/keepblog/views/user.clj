@@ -9,11 +9,11 @@
 
 ; 登录页面显示
 (defn login 
-  ([] (render-file "login.html" {}))
-  ([info] (render-file "login.html" info)))
+  ([] (render-file "user/login.html" {}))
+  ([info] (render-file "user/login.html" info)))
 
 ; 注册页面显示
 (defn register
-  ([] (render-file "register.html" {}))
-  ([info] (render-file "register.html" info)))
+  ([] (render-file "user/register.html" {}))
+  ([info] (render-file "user/register.html" info)))
 

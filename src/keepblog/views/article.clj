@@ -7,7 +7,7 @@
 (config/set-config)
 
 (defn create-article 
-  ([info] (render-file "create_article.html" info)))
+  ([info] (render-file "article/create_article.html" info)))
 
 (defn create-article-suc
-  ([info] (render-file "create_article_suc.html" info)))
+  ([info] (render-file "article/create_article_suc.html" info)))
