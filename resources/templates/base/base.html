@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %} {% endblock %}</title>
+	{% style "/staticfiles/css/base/base.css" %}
+	{% block styles %}{% endblock %}
+	
+	{% script "/staticfiles/js/jquery/jquery-1.12.1.min.js" %}
+	{% block scripts %}{% endblock %}
+</head>
+
+<body>
+	{% include "base/header.html" %}
+	
+	{% block body %}{% endblock %}
+	
+	{% include "base/footer.html" %}
+</body>
+
+	{% block scripts %}{% endblock %}
+</html>
