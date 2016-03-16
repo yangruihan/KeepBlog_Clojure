@@ -4,6 +4,10 @@
 写文章
 {% endblock %}
 
+{% block styles %}
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock %}
+
 {% block body %}
 	<h2>写文章</h2>
 	<div class="error_msg">{{ error }}</div>
@@ -19,12 +23,14 @@
 		<br>
 		标签：<input type="text" name="tag"><br>
 		内容：<br>
-		<textarea cols="100" rows="30" name="content">{{ article.content }}</textarea><br>
+		<!-- <textarea cols="100" rows="30" name="content">{{ article.content }}</textarea><br>  -->
+		<textarea class="markdown_editor" id="markdown_editor" name="content">{{ article.content }}</textarea>
 		<input type="submit" value="提交">
 		<button id="back_btn" class="back_btn">取消</button>
 	</form>
 {% endblock %}
 
 {% block scripts %}
+	<script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 	{% script "/staticfiles/js/article/create_article.js"%}
 {% endblock %}

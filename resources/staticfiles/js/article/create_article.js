@@ -3,4 +3,10 @@ $(document).ready(function () {
 		location.href = '/';
 		return false;
 	});
+	
+	var simplemde = new SimpleMDE({
+		autoDownloadFontAwesome: true,
+		element: $("#markdown_editor")[0],
+		tabSize: 4
+	});
 });
